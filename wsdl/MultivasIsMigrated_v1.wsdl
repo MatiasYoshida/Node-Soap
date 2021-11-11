@@ -2,11 +2,11 @@
 	<wsdl:documentation>MultivasIsMigrated -  - Generado por TER - 2019.08.16 22:14:20 - NO MODIFICAR A MANO</wsdl:documentation>
 	<wsdl:types>
 		<xsd:schema targetNamespace="http://telefonica.com/globalIntegration/services/SOAP/MultivasIsMigrated/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-			<xsd:import namespace="http://telefonica.com/globalIntegration/services/MultivasIsMigrated/v1" schemaLocation="http://127.0.0.1:3030/MultivasIsMigrated_v1.xsd">
+			<xsd:import namespace="http://telefonica.com/globalIntegration/services/MultivasIsMigrated/v1" schemaLocation="http://127.0.0.1:3001/MultivasIsMigrated_v1.xsd">
 			</xsd:import>
-			<xsd:import namespace="http://telefonica.com/globalIntegration/header" schemaLocation="http://127.0.0.1:3030/Header_DOCLIT.xsd">
+			<xsd:import namespace="http://telefonica.com/globalIntegration/header" schemaLocation="http://127.0.0.1:3001/Header_DOCLIT.xsd">
 			</xsd:import>
-			<xsd:import namespace="http://telefonica.com/globalIntegration/fault" schemaLocation="http://127.0.0.1:3030/MessageFault_DOCLIT.xsd">
+			<xsd:import namespace="http://telefonica.com/globalIntegration/fault" schemaLocation="http://127.0.0.1:3001/MessageFault_DOCLIT.xsd">
 			</xsd:import>
 		</xsd:schema>
 	</wsdl:types>
@@ -61,7 +61,7 @@
 
 	<wsdl:service name="MultivasIsMigrated">
 		<wsdl:port binding="serv:MultivasIsMigratedBinding" name="MultivasIsMigrated">
-			<wsdlsoap:address location="http://localhost:3030/MultivasIsMigrated_1/"/>
+			<wsdlsoap:address location="http://localhost:3001/MultivasIsMigrated_1/"/>
 		</wsdl:port>
 	</wsdl:service>
-</wsdl:definitions>
+</wsdl:definitions> 
