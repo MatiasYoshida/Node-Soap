@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://telefonica.com/globalIntegration/fault" xmlns:flt="http://telefonica.com/globalIntegration/fault" 
+xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<annotation>
+		<documentation>Unique message fault definition for global integration (type definition) version 16.11 - Generado por TER - NO MODIFICAR A MANO</documentation>
+	</annotation>
+
+	<xsd:element name="MessageFault" type="flt:operationFaultType"/>
+
+	<xsd:complexType name="operationFaultType">
+		<xsd:sequence>
+			<xsd:element name="exceptionCategory" type="flt:exceptionCategoryType"/>
+			<xsd:element name="exceptionCode" type="flt:exceptionCodeType"/>
+			<xsd:element name="exceptionMessage" type="flt:exceptionMessageType"/>
+			<xsd:element name="exceptionDetail" type="flt:exceptionDetailType"/>
+			<xsd:element name="exceptionSeverity" type="flt:exceptionSeverityType"/>
+			<xsd:element name="appDetail" type="flt:appDetailType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="exceptionCategoryType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Los valores posibles de este elemento seran SVC, POL, SEC en el caso de una excepcion producida por en mensaje enviado por el cliente y SRV si el error se produce en el lado del servidor debido a problemas tecnicos.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionCodeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Categoria del error. Tendra asociado un rango numerico de cuatro digitos: [1000-1999] si SVC, [2000-2999] si POC, [3000-3999] si SEC, [4000-4999] si SRV.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:int">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionMessageType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Mensaje de texto asociado al identificador del error indicado por el elemento exceptionCode.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionDetailType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">El valor de este elemento debe proveer informacion sensible sobre sobre los detalles del error relativa a la causa y al nodo, aplicacion, clase, metodo o parrafo del programa donde se ha producido el error.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionSeverityType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Severidad del error. El valor indicado en este campo debe servir para distinguir si el error es permanente o temporal, de tal forma que permite al consumidor o nodos intermedios conocer si es posible volver a intentar la operacion. Ante un error solo podra considerarse la posibilidad de hacer reintentos si es de tipo Servidor. Los valores pueden ser: E (error) cuando no es recuperable; R (retry) es un error temporal con posibilidad de reintentos.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="appDetailType">
+		<xsd:sequence>
+			<xsd:element name="exceptionAppCode" type="flt:exceptionAppCodeType"/>
+			<xsd:element name="exceptionAppMessage" type="flt:exceptionAppMessageType"/>
+			<xsd:element name="exceptionAppLocation" type="flt:exceptionAppLocationType" minOccurs="0"/>
+			<xsd:element name="exceptionAppCause" type="flt:exceptionAppCauseType"/>
+			<xsd:element name="varArg" type="flt:varArgType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="exceptionAppCodeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Codigo identificativo del error notificado por la aplicacion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionAppMessageType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Mensaje asociado al codigo de error indicado por el elemento exceptionAppCode.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionAppLocationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Localizacion del error informado por la aplicacion invocada.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="exceptionAppCauseType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Causa del error informado por la aplicacion invocada.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="varArgType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Este elemento queda definido por un tipo complejo y variable en cuya finalidad es permitir cubrir las necesidades particulares de trasmision de informacion del contexto de aplicacion, no relacionada con conceptos de negocio, en las interacciones entre dos sistemas. La estructura propuesta esta formada por un grupo con pares clave-multivalor. No queda recomendado el uso de este elemento por parte de los sistemas salvo en escenarios con necesidades muy concretas.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="arg" type="flt:argType" maxOccurs="99"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="argType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Este elemento queda definido por un tipo complejo y variable en cuya finalidad es permitir cubrir las necesidades particulares de trasmision de informacion del contexto de aplicacion, no relacionada con conceptos de negocio, en las interacciones entre dos sistemas. La estructura propuesta esta formada por un grupo con pares clave-multivalor. No queda recomendado el uso de este elemento por parte de los sistemas salvo en escenarios con necesidades muy concretas.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="key" type="flt:keyType"/>
+			<xsd:element name="values" type="flt:valuesType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="keyType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Key de un valor de argType.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="valuesType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Valores asociados a una key.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="flt:valueType" minOccurs="1" maxOccurs="99"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="valueType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Valor.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+		</xsd:restriction>
+	</xsd:simpleType>
+</schema>

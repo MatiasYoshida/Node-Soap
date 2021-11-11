@@ -1,0 +1,67 @@
+<wsdl:definitions name="MultivasIsMigrated" targetNamespace="http://telefonica.com/globalIntegration/services/SOAP/MultivasIsMigrated/v1" xmlns:serv="http://telefonica.com/globalIntegration/services/SOAP/MultivasIsMigrated/v1" xmlns:p1="http://telefonica.com/globalIntegration/services/MultivasIsMigrated/v1" xmlns:flt="http://telefonica.com/globalIntegration/fault" xmlns:cab="http://telefonica.com/globalIntegration/header" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:documentation>MultivasIsMigrated -  - Generado por TER - 2019.08.16 22:14:20 - NO MODIFICAR A MANO</wsdl:documentation>
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://telefonica.com/globalIntegration/services/SOAP/MultivasIsMigrated/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://telefonica.com/globalIntegration/services/MultivasIsMigrated/v1" schemaLocation="http://127.0.0.1:3030/MultivasIsMigrated_v1.xsd">
+			</xsd:import>
+			<xsd:import namespace="http://telefonica.com/globalIntegration/header" schemaLocation="http://127.0.0.1:3030/Header_DOCLIT.xsd">
+			</xsd:import>
+			<xsd:import namespace="http://telefonica.com/globalIntegration/fault" schemaLocation="http://127.0.0.1:3030/MessageFault_DOCLIT.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="isMigratedRequest">
+		<wsdl:documentation>isMigratedRequest Message Type</wsdl:documentation>
+		<wsdl:part name="isMigratedBodyReq" element="p1:isMigratedRequest"/>
+	</wsdl:message>
+	<wsdl:message name="isMigratedResponse">
+		<wsdl:documentation>isMigratedResponse Message Type</wsdl:documentation>
+		<wsdl:part name="isMigratedBodyRes" element="p1:isMigratedResponse"/>
+	</wsdl:message>
+	<wsdl:message name="isMigratedHeaderReq">
+		<wsdl:documentation>isMigratedHeaderReq is the common definition of request header</wsdl:documentation>
+		<wsdl:part name="isMigratedHeaderReq" element="cab:HeaderIn"/>
+	</wsdl:message>
+	<wsdl:message name="isMigratedHeaderRes">
+		<wsdl:documentation>isMigratedHeaderRes is the common definition of response header</wsdl:documentation>
+		<wsdl:part name="isMigratedHeaderRes" element="cab:HeaderOut"/>
+	</wsdl:message>
+	<wsdl:message name="MessageFault">
+		<wsdl:documentation>The definition of message fault is unique</wsdl:documentation>
+		<wsdl:part name="MessageCommonFault" element="flt:MessageFault"/>		
+	</wsdl:message>
+
+	<wsdl:portType name="MultivasIsMigrated">
+		<wsdl:documentation>MultivasIsMigrated - </wsdl:documentation>
+		<wsdl:operation name="isMigrated">
+			<wsdl:documentation/>
+			<wsdl:input name="isMigratedRequest" message="serv:isMigratedRequest"/>
+			<wsdl:output name="isMigratedResponse" message="serv:isMigratedResponse"/>
+			<wsdl:fault name="MessageFault" message="serv:MessageFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="MultivasIsMigratedBinding" type="serv:MultivasIsMigrated">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+		<wsdl:operation name="isMigrated">
+			<wsdlsoap:operation soapAction="http://telefonica.com/globalIntegration/services/soap1.1/isMigrated"/>
+			<wsdl:input name="isMigratedRequest">
+				<wsdlsoap:header message="serv:isMigratedHeaderReq" part="isMigratedHeaderReq" use="literal"/>
+				<wsdlsoap:body parts="isMigratedBodyReq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="isMigratedResponse">
+				<wsdlsoap:header message="serv:isMigratedHeaderRes" part="isMigratedHeaderRes" use="literal"/>
+				<wsdlsoap:body parts="isMigratedBodyRes" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MessageFault">
+				<wsdlsoap:fault name="MessageFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="MultivasIsMigrated">
+		<wsdl:port binding="serv:MultivasIsMigratedBinding" name="MultivasIsMigrated">
+			<wsdlsoap:address location="http://localhost:3030/MultivasIsMigrated_1/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

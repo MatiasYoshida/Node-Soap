@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://telefonica.com/globalIntegration/header" xmlns:cab="http://telefonica.com/globalIntegration/header" 
+xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<annotation>
+		<documentation>Unique header definition for global integration (type definition) version 15.8 - Generado por TER - NO MODIFICAR A MANO</documentation>
+	</annotation>
+
+	<xsd:element name="HeaderIn" type="cab:HeaderInType"/>
+	<xsd:element name="HeaderOut" type="cab:HeaderOutType"/>
+
+	<xsd:complexType name="HeaderInType">
+		<xsd:sequence>
+			<xsd:element name="country" type="cab:countryType"/>
+			<xsd:element name="lang" type="cab:langType"/>
+			<xsd:element name="entity" type="cab:entityType"/>
+			<xsd:element name="system" type="cab:systemType"/>
+			<xsd:element name="subsystem" type="cab:subsystemType"/>
+			<xsd:element name="originator" type="cab:originatorType"/>
+			<xsd:element name="sender" type="cab:senderType" minOccurs="0"/>
+			<xsd:element name="userId" type="cab:userIdType"/>
+			<xsd:element name="wsId" type="cab:wsIdType" minOccurs="0"/>
+			<xsd:element name="wsIp" type="cab:wsIpType" minOccurs="0"/>
+			<xsd:element name="wsIpv6" type="cab:wsIpv6Type" minOccurs="0"/>
+			<xsd:element name="operation" type="cab:operationType"/>
+			<xsd:element name="destination" type="cab:destinationType"/>
+			<xsd:element name="pid" type="cab:pidType" minOccurs="0"/>
+			<xsd:element name="execId" type="cab:execIdType"/>
+			<xsd:element name="msgId" type="cab:msgIdType" minOccurs="0"/>
+			<xsd:element name="timestamp" type="cab:timestampType"/>
+			<xsd:element name="msgType" type="cab:msgTypeType" minOccurs="0"/>
+			<xsd:element name="varArg" type="cab:varArgType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="HeaderOutType">
+		<xsd:sequence>
+			<xsd:element name="originator" type="cab:originatorType"/>
+			<xsd:element name="destination" type="cab:destinationType"/>
+			<xsd:element name="pid" type="cab:pidType" minOccurs="0"/>
+			<xsd:element name="execId" type="cab:execIdType"/>
+			<xsd:element name="msgId" type="cab:msgIdType" minOccurs="0"/>
+			<xsd:element name="timestamp" type="cab:timestampType"/>
+			<xsd:element name="msgType" type="cab:msgTypeType" minOccurs="0"/>
+			<xsd:element name="varArg" type="cab:varArgType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="countryType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Identifica el pais de la entidad mandante.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="langType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Idioma del contenido de la carga util del mensaje SOAP, incluida en el elemento body.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="entityType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Valor de este elemento simple debe identificar de forma univoca, y a nivel global, la entidad peticionaria.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="systemType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Sistema de informacion correspondiente a la entidad especificada por el campo entity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="subsystemType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Subsistema, aplicacion o dominio funcional correspondiente a la entidad especificada por el campo system.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="originatorType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Debe contener informacion identificativa completa del originario de la peticion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="101"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="senderType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Solo debe ser informado cuando la entidad, sistema o subsistema que ha creado el mensaje es diferente a la que envia la peticion. En este escenario, normalmente, existira un nodo intermedio que procesara el mensaje y realizara el envio siendo el identificador de este nodo el valor de este elemento.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="userIdType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">identificador del usuario del sistema y/o subsistema que inicia la peticion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="wsIdType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Estacion de trabajo del usuario si este es informado mediante el elemento userId. En el caso de no venir informado el identificador de usuario el valor de este elemento debera estar relacionado con el identificador de la infraestructura desde la que se realiza la peticion. Es deseable que en ambos casos el valor sea el nombre del host de la maquina junto con el identificador de la instancia.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="wsIpType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">IP (IPv4) asociada al valor informado en el elemento wsId. Es deseable que el valor de este elemento corresponda a la interfaz de red de la maquina desde la que se realiza la peticion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="15"/>
+			<xsd:pattern value="((0|(1[0-9]{0,2})|(2(([0-4][0-9]?)|(5[0-5]?)|([6-9]?)))|([3-9][0-9]?))\.){3}(0|(1[0-9]{0,2})|(2(([0-4][0-9]?)|(5[0-5]?)|([6-9]?)))|([3-9][0-9]?))"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="wsIpv6Type">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">IP (IPv6) asociada al valor informado en el elemento wsId. Es deseable que el valor de este elemento corresponda a la interfaz de red de la maquina desde la que se realiza la peticion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="39"/>
+			<xsd:pattern value="((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="operationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">El valor podra coincidir con el informado en la cabecera HTTP SOAPAction en SOAP 1.1 o podra estar formado por un identificador logico de la funcionalidad ofrecida por el servicio ejecutado.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="64"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="destinationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Debe contener informacion identificativa completa del proveedor del servicio invocado. Su formato sera concatenacion de los elementos countryCode, entity, system y subsystem separados por el caracter : del proveedor del servicio.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="101"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="pidType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">El valor de este elemento debe ser un identificador unico del flujo de ejecucion para cubrir funcionalmente las interacciones que se puedan necesitar para completar un proceso o subproceso de negocio, permitiendo al consumidor asociar ejecuciones a varios servicios dentro de la misma unidad funcional. El valor de este elemento debera ser retornado en la respuesta con el fin de correlacionar los mensajes de peticion y respuesta asociados a determinado nivel de agrupacion. Por ejemplo, si para realizar alguna tramitacion es necesario ejecutar varias operaciones, la aplicacion consumidora generara un identificador unico que mantendra vivo en su contexto y que sera comun en las invocaciones a los servicios implicados.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="36"/>
+			<xsd:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="execIdType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">El valor de este elemento debe ser un identificador unico de cada ejecucion dentro del contexto de la aplicacion consumidora. En cada peticion la aplicacion consumidora debe generar e informar este valor que debera ser devuelto en la respuesta con el fin de correlacionar los mensajes de peticion y respuesta. A diferencia del elemento pid, donde su valor puede ser compartido entre distintas ejecuciones, el valor de este elemento no pude ser compartido entre ejecuciones, aunque se trate de peticiones al mismo servicio.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="36"/>
+			<xsd:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="msgIdType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Identificador de serializacion del mensaje. El valor de este campo debe actualizarse siempre que se realice alguna modificacion sobre el mensaje en nodos intermedios. Por tanto, dentro de un flujo de ejecucion podran encontrarse dos mensajes con mismo valor del elemento executionId y distinto valor del elemento msgId, indicando que el mensaje es diferente. Por ejemplo el mensaje de peticion y el de respuesta en una ejecucion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="36"/>
+			<xsd:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="timestampType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">El valor de este elemento simple debe ser la marca de tiempo correspondiente al envio del mensaje. Este valor incluira la fecha, la hora con precision de milisegundos y la zona horaria siguiendo el estandar de tiempo UTC y la especificacion ISO 8601.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="29"/>
+			<xsd:pattern value="\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d.\d\d\d[+\-]\d\d:\d\d"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="msgTypeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Este elemento indica el tipo de mensaje y esta relaciona con el escenario de uso y modo de interaccion. Puede tener los siguientes valores: REQUEST (Indica que el mensaje corresponde a una peticion), RESPONSE (el mensaje corresponde a una respuesta en un modo de ejecucion sincrona), REPLY (el mensaje corresponde a una respuesta en un modo de ejecucion asincrona), NOTIFICATION (indica una notificacion por parte de un servicio en un patron de intercambio de mensajes publicacion-suscripcion), ERROR (el mensaje corresponde a un SOAP Fautl).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="varArgType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Este elemento queda definido por un tipo complejo y variable en cuya finalidad es permitir cubrir las necesidades particulares de trasmision de informacion del contexto de aplicacion, no relacionada con conceptos de negocio, en las interacciones entre dos sistemas. La estructura propuesta esta formada por un grupo con pares clave-multivalor. No queda recomendado el uso de este elemento por parte de los sistemas salvo en escenarios con necesidades muy concretas.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="arg" type="cab:argType" maxOccurs="10"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="argType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Este elemento queda definido por un tipo complejo y variable en cuya finalidad es permitir cubrir las necesidades particulares de trasmision de informacion del contexto de aplicacion, no relacionada con conceptos de negocio, en las interacciones entre dos sistemas. La estructura propuesta esta formada por un grupo con pares clave-multivalor. No queda recomendado el uso de este elemento por parte de los sistemas salvo en escenarios con necesidades muy concretas.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="key" type="cab:keyType"/>
+			<xsd:element name="values" type="cab:valuesType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="keyType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Key de un valor de argType.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="valuesType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Valores asociados a una key.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="cab:valueType" minOccurs="1" maxOccurs="10"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="valueType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="ES">Valor.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+		</xsd:restriction>
+	</xsd:simpleType>
+</schema>
