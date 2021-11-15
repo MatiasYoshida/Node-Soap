@@ -3,12 +3,14 @@ const soap = require('soap');
 const MultivasXSD = require('./routes/MultivasXSD');
 const conectarAMySQL = require ('./Connections');
 const { ok } = require('assert');
+const morgan = require('morgan');
 
 var respuesta;
 const app = express();
 const PORT = process.env.PORT || 3001
 
 app.use('/', MultivasXSD);
+app.use(morgan('tiny'));
 
 var MultivasService = {
     MultivasIsMigrated: {
